@@ -6,7 +6,7 @@ grammar_cjkRuby: true
 ## RN项目结构规范
 当我们通过 `react-native init XXXProject` 创建一个新工程后,一般是在当前项目根目录中新建一个js(或app)文件夹，用来存放js相关的代码以及资源。这时工程结构大致如下(有省略)：
 ```
-.
+.api.js
 ├──__tests__                   			单元测试代码文件夹
 ├──android                  			android原生代码文件夹
 ├──ios									ios原生代码文件夹
