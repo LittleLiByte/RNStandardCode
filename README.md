@@ -336,8 +336,27 @@ const styles = StyleSheet.create({
  - 本代码规范并不能涵盖全部情况，如有需要可自行修改，规范是死的，人是活的，并且规范也并不是唯一的，但大家按照同一个规范来开发，代码可读性和可维护性自然会比较高。
  - 关于私有方法名前需不需要添加下划线“_”并没有规定，可加可不加，只是约定俗成的，并且js中没有“私有变量”这种东西。不过选择加了最好就保持一致的代码风格，不要两者皆有。
 
-## ESLint
+## 代码风格控制-ESLint
 ESLint是一个QA工具，用来避免低级错误和统一代码的风格。在`.eslintrc.js`配置后，就可以检查代码风格是否统一。
+在p`ackage.json`文件中`devDependencies`的添加以下依赖：
+
+``` json
+ 	"babel-eslint": "^7.2.3",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react-native": "^3.0.1",
+```
+
+然后在scripts节点下添加以下脚本项：
+
+``` avrasm
+  "lint": "eslint  js"
+```
+ps. **js**为JS代码存放的文件夹
+然后运行`npm run lint`命令即可检查代码规范。
 
 
 ## RN项目svn可忽略文件说明
