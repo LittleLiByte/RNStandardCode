@@ -1,7 +1,6 @@
 ---
 title: RN 开发规范
-tags: 新建,模板,小书匠
-grammar_cjkRuby: true
+tags: React Native,规范
 ---
 ## RN项目结构规范
 当我们通过 `react-native init XXXProject` 创建一个新工程后,一般是在当前项目根目录中新建一个js(或app)文件夹，用来存放js相关的代码以及资源。这时工程结构大致如下(有省略)：
