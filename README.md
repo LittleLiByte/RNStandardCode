@@ -30,7 +30,7 @@ js(app)
  使用**Redux**框架的RN工程可以参考以下工程目录结构
 ```
 js(app)
-├── action 							edux中的action部分
+├── action 							redux中的action部分
 ├── component 						可复用的组件（非完整页面），该文件夹内可按业务或功能模块再细分
 ├── config							配置项（常量、接口地址、路由、多语言化等预置数据）
 ├── image							图片		
