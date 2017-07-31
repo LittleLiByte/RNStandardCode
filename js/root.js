@@ -16,14 +16,12 @@ export default class RootComponent extends Component {
         //  请求头添加示例
         // let headers = new Headers();
         // headers.append('Content-Type', 'application/json');
-        SimpleFetchUtils.sendGet('http://gc.ditu.aliyun.com/geocoding?a=广州市', null,
-            (data) => {
+        SimpleFetchUtils.sendGet('http://gc.ditu.aliyun.com/geocoding?a=广州市', null).then((data, error) => {
+            if (data)
                 console.log(data);
-            },
-            (error) => {
-                console.log('error=' + error);
-            },
-        );
+            else
+                console.log(error);
+        });
     };
 
     postTest = () => {
