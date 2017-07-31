@@ -1,6 +1,7 @@
 ---
 title: RN 开发规范
-tags: React Native,规范
+tags: 新建,模板,小书匠
+
 ---
 ## RN项目结构规范
 当我们通过 `react-native init XXXProject` 创建一个新工程后,一般是在当前项目根目录中新建一个js(或app)文件夹，用来存放js相关的代码以及资源。这时工程结构大致如下(有省略)：
@@ -22,18 +23,18 @@ js(app)
 ├── page							完整页面，该文件夹内可按业务再细分
 ├── config							配置项（常量、接口地址、路由、多语言化等预置数据）
 ├── util							工具类（非UI组件),该文件夹内可按功能模块再细分
-├── image							图片		
+├── image							图片
 └── root.js							统一index.android.js和index.ios.js入口
 ```
  ps.下面的划分方式的工程中未使用[**Redux**][1]和[**Redux-Saga**][2]，并且在对RN比较了解之前也不太建议使用。如果使用了这两个组件框架，工程目录结构也会有所不同。
- 
+
  使用**Redux**框架的RN工程可以参考以下工程目录结构
 ```
 js(app)
-├── action 							redux中的action部分
+├── action 							edux中的action部分
 ├── component 						可复用的组件（非完整页面），该文件夹内可按业务或功能模块再细分
 ├── config							配置项（常量、接口地址、路由、多语言化等预置数据）
-├── image							图片		
+├── image							图片
 ├── page							完整页面，该文件夹内可按业务再细分
 ├── reducer							redux中reducer部分都在这里，reducer和action不一定是一一对应的
 ├── store							redux中store部分都在这里
@@ -50,8 +51,8 @@ js(app)
 
   - **扩展名**: 使用`.js`作为js文件的扩展名。如果同一个文件夹下有同名而不同作用的js文件，则通过中缀（小写）进一步区分，例如：`HomeView.component.js`,`HomeView.style.js`,`HomeView.action.js`等。
   - **文件名**: 使用驼峰命名法且首字母大写，如`HomeView.js`。
-  - **组件命名**: 与文件名（除中缀外）完全一致。如果组件单独放置在目录中，则目录名也一致。  
-  
+  - **组件命名**: 与文件名（除中缀外）完全一致。如果组件单独放置在目录中，则目录名也一致。
+
     ```javascript
     // bad
     import Footer from './Component/Footer/FooterView'
@@ -160,8 +161,8 @@ js(app)
     // good
     const { userName, age, sex } = this.props;
     const { checked } = this.state;
-    ```  
-    
+    ```
+
 ### 括号
   - 当JSX标签超过一行时，使用括号包裹。
     ```javascript
@@ -236,14 +237,14 @@ js(app)
 
 ### 组件代码编写顺序
 
- - PropType声明 
+ - PropType声明
  - 默认属性
- - 静态方法 
+ - 静态方法
  - 构造函数(包含state)
  - 组件生命周期方法
  - 对外提供的公有方法
  - 私有方法，包括点击回调或者事件回调等等
- - 子组件的 render 方法 
+ - 子组件的 render 方法
  - 本组件的render方法
 
 **示例：**
@@ -336,9 +337,11 @@ const styles = StyleSheet.create({
  - 本代码规范并不能涵盖全部情况，如有需要可自行修改，规范是死的，人是活的，并且规范也并不是唯一的，但大家按照同一个规范来开发，代码可读性和可维护性自然会比较高。
  - 关于私有方法名前需不需要添加下划线“_”并没有规定，可加可不加，只是约定俗成的，并且js中没有“私有变量”这种东西。不过选择加了最好就保持一致的代码风格，不要两者皆有。
 
-## 代码风格控制-ESLint
-ESLint是一个QA工具，用来避免低级错误和统一代码的风格。在`.eslintrc.js`配置后，就可以检查代码风格是否统一。
-在p`ackage.json`文件中`devDependencies`的添加以下依赖：
+## 代码风格控制工具-ESLint
+ESLint是一个QA工具，用来统一代码风格和避免低级错误。在一个工程中配置eslint后，所有项目参与人员都可以通过eslint配置来检查代码风格是否统一。
+
+配置方法：
+### 1.在`package.json`文件中`devDependencies`的添加以下依赖并通过npm install 命令安装：
 
 ``` json
  	"babel-eslint": "^7.2.3",
@@ -350,14 +353,68 @@ ESLint是一个QA工具，用来避免低级错误和统一代码的风格。在
     "eslint-plugin-react-native": "^3.0.1",
 ```
 
-然后在scripts节点下添加以下脚本项：
+### 2.在scripts节点下添加以下脚本配置项：
 
 ``` avrasm
   "lint": "eslint  js"
 ```
-ps. **js**为JS代码存放的文件夹
-然后运行`npm run lint`命令即可检查代码规范。
+### 3.添加eslint配置文件
+有两种方法：
 
+ - 直接复制别处的 `eslint.js`文件到项目根目录中
+ - 通过`eslint --init`命令生成，这个方法需要指定相应的配置项，详情请参考：[React Native 之使用 Eslint 检查代码规范][3]
+
+eslint.js配置示例：
+
+``` javascript
+module.exports = {
+   "extends": "airbnb",
+   "env": {
+       "browser": true,
+       "node": true,
+       "mocha": true
+   },
+   "parser": "babel-eslint",
+   "parserOptions": {
+       "ecmaFeatures": {
+           "forOf": true,
+           "jsx": true,
+           "es6": true
+       }
+   },
+   "rules": {
+       "comma-dangle": 0,
+       "react/prop-types": 0,
+       "object-curly-spacing": [0, "never"],//大括号内是否允许不必要的空格
+       "comma-spacing": 0,//逗号前后的空格
+       "indent": [2, 4],//缩进风格
+       "eol-last": 0,
+       "spaced-comment": 0,
+       "prefer-const": 1,
+       "react/jsx-indent": 0,
+       "react/jsx-indent-props": 0,
+       "react/no-unused-prop-types":1,
+       "prefer-template":1,
+       "react/jsx-filename-extension":0,
+       "no-use-before-define":0,
+       "class-methods-use-this": 0,
+       "react/forbid-prop-types": 0,
+       "arrow-body-style": [
+           2,
+           "as-needed"
+       ],
+   }
+};
+```
+其中主要是在rules节点添加代码风格配置项，key-value形式，value值为0，1，2三个值
+
+ 1. "off" or 0 - 关闭这个规则校验
+ 2. "warn" or 1  开启这个规则校验，但只是提醒，不会退出
+ 3.  "error" or 2 - 开启这个规则校验，并退出
+
+然后运行npm run lin命令即可进行代码风格检查。 运行示例：
+
+![enter description here][4]
 
 ## RN项目svn可忽略文件说明
 在RN开发中不需要提交svn文件请参考`.gitignore`文件内容,一般来说，编译生成的文件（例如build目录），通过配置或脚本运行生成的文件（例如node_modules目录）是不需要提交svn的。
@@ -386,20 +443,22 @@ ps. **js**为JS代码存放的文件夹
 
 如果使用的IDE是WebStorm，还可以直接配置脚本运行。以**bundle-android**为例，选择`Edit Configurations...`，然后在新弹出窗口左上角点击"+"按钮并选择npm一项。
 
-![enter description here][3]
-
-![enter description here][4]
-
 ![enter description here][5]
-修改Name并在Scrtpts一项中选择`bundle-android`,然后点击**Apply**保存关掉弹窗。此时在Webstorm右上角就会出现一个`bundle-android`可运行项，运行该项即可打包出Android离线包。
 
 ![enter description here][6]
 
-## 网络请求简单封装
+![enter description here][7]
+修改Name并在Scrtpts一项中选择`bundle-android`,然后点击**Apply**保存关掉弹窗。此时在Webstorm右上角就会出现一个`bundle-android`可运行项，运行该项即可打包出Android离线包。
+
+![enter description here][8]
+
+
 
   [1]: https://github.com/reactjs/redux
   [2]: https://github.com/yelouafi/redux-saga/
-  [3]: http://om2bpqram.bkt.clouddn.com/1501055013489.jpg
-  [4]: http://om2bpqram.bkt.clouddn.com/1501055286521.jpg
-  [5]: http://om2bpqram.bkt.clouddn.com/1501056088823.jpg
-  [6]: http://om2bpqram.bkt.clouddn.com/1501055763509.jpg
+  [3]: http://www.jianshu.com/p/8b49e268fe69
+  [4]: http://om2bpqram.bkt.clouddn.com/1501475784593.jpg
+  [5]: http://om2bpqram.bkt.clouddn.com/1501055013489.jpg
+  [6]: http://om2bpqram.bkt.clouddn.com/1501055286521.jpg
+  [7]: http://om2bpqram.bkt.clouddn.com/1501056088823.jpg
+  [8]: http://om2bpqram.bkt.clouddn.com/1501055763509.jpg
