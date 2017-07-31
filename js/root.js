@@ -17,10 +17,11 @@ export default class RootComponent extends Component {
         // let headers = new Headers();
         // headers.append('Content-Type', 'application/json');
         SimpleFetchUtils.sendGet('http://gc.ditu.aliyun.com/geocoding?a=广州市', null).then((data, error) => {
-            if (data)
+            if (data) {
                 console.log(data);
-            else
+            } else {
                 console.log(error);
+            }
         });
     };
 

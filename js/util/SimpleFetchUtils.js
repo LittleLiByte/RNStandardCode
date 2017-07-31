@@ -4,7 +4,6 @@
  */
 
 export default class SimpleFetchUtils {
-
     static async sendGet(url, headers) {
         try {
             let response = await fetch(url, {
@@ -12,9 +11,9 @@ export default class SimpleFetchUtils {
                 headers,
             });
             let data = await response.json();
-            return {'data': data, 'error': undefined};
+            return {data, error: undefined};
         } catch (e) {
-            return {'data': undefined, 'error': e}
+            return {...e};
         }
     }
 

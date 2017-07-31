@@ -21,9 +21,9 @@ export default {
     //首页点击最新上线后的页面
     newPublishUrl: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/load_new',
     //活动特卖页面
-    activitySell:'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo',
-    activitySell1:'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo1',
-    activitySell2:'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo2',
-    activitySell3:'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo3',
-    activitySell4:'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo4',
-}
+    activitySell: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo',
+    activitySell1: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo1',
+    activitySell2: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo2',
+    activitySell3: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo3',
+    activitySell4: 'https://coding.net/u/liubtest/p/GitTest/git/raw/master/ActivityInfo4',
+};
